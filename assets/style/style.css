@@ -16,13 +16,361 @@
 
 body {
     font-family: 'Inter';
+    background-color: #e7f2fd;
+    transition: all 0.5s ease;
+}
+
+body.dark {
+    background-color: #333;
+  }
+body.dark {
+    --white-color: #333;
+    --blue-color: #fff;
+    --light-blue-color: rgba(54, 162, 235, 1);
+    --grey-color: #f2f2f2;
+    --grey-color-light: #aaa;
 }
 
 table {
     margin: 0px auto;
 }
 
-.chart {
-    width: 800px;
-    margin: 0px auto;
+.chartCard {
+    width: calc(100vw - 400px);
+    height: calc(100vh - 200px);
+    margin-bottom: 20px;
+
 }
+.chartBox {
+  width: calc(100vw - 300px);
+  height: calc(100vh - 150px);
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 3px rgba(54, 162, 235, 1);
+  background: white;
+}
+
+.button {
+  background-color: rgba(54, 162, 235, 1); 
+  border: none;
+  color: white;
+  padding: 8px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.button-edit {
+  border: none;
+  color: var(--grey-color);
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+.button-delete {
+  border: none;
+  color: red;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;}
+
+.table-pasien {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table-pasien thead tr {
+  background-color: rgba(54, 162, 235, 1);
+  color: #ffffff;
+  text-align: left;
+}
+
+.table-pasien th,
+.table-pasien td {
+  padding: 12px 15px;
+}
+
+.table-pasien tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table-pasien tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table-pasien tbody tr:last-of-type {
+  border-bottom: 2px solid #00A1FB;
+}
+
+#health {
+    color: black;
+    font-size: 36px;
+}
+
+#hub {
+    color: #00A1FB;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#healtHub span {
+    display: inline-block;
+    font-size: 36px;   
+}
+
+.content {
+  display: none;
+  padding: 20px;
+}
+
+.content.active {
+  display: block;
+}
+
+.content h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+/* navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    z-index: 1000;
+    box-shadow: 0 0 2px var(--grey-color-light);
+}
+
+.logo_item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* Primary Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+    --white-color: #fff;
+    --blue-color: #4070f4;
+    --grey-color: #707070;
+    --grey-color-light: #aaa;
+}
+
+#sidebarOpen {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+  #sidebarOpen {
+    font-size: 25px;
+    display: block;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--grey-color);
+  }
+}  
+
+em {
+  font-style: normal;
+  font-family: 'Inter';
+  color: var(--grey-color-light);
+}
+
+/* Layout */
+.s-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.s-layout__content {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  flex: 1;
+}
+
+/* Sidebar */
+.s-sidebar__trigger {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4em;
+  background: var(--grey-color-light);
+}
+
+.s-sidebar__trigger > i {
+  display: inline-block;
+  margin: 1.5em 0 0 1.5em;
+  color: #fff;
+}
+
+.s-sidebar__nav {
+  position: fixed;
+  top: 0;
+  left: -15em;
+  overflow: hidden;
+  transition: all .3s ease-in;
+  width: 15em;
+  height: 100%;
+  background: var(--white-color);
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.s-sidebar__nav:hover,
+.s-sidebar__nav:focus,
+.s-sidebar__trigger:focus + .s-sidebar__nav,
+.s-sidebar__trigger:hover + .s-sidebar__nav {
+  left: 0;
+}
+.s-sidebar__nav-link:hover em,
+.s-sidebar__nav-link:hover i {
+  color: var(--white-color);
+}
+
+.s-sidebar__nav ul {
+  position: absolute;
+  top: 4em;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 15em;
+}
+
+.s-sidebar__nav ul li {
+  width: 100%;
+}
+
+.s-sidebar__nav-link {
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  height: 4em;
+}
+
+.s-sidebar__nav-link em {
+  position: absolute;
+  top: 50%;
+  left: 4em;
+  transform: translateY(-50%);
+}
+
+.s-sidebar__nav-link:hover {
+  background: var(--blue-color);
+  border-radius: 10px;
+  margin: 0 10px;
+  color: var(--white-color)
+}
+
+.s-sidebar__nav-link > i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  color: var(--grey-color-light);
+}
+
+.s-sidebar__nav-link > i::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Mobile First */
+@media (min-width: 42em) {
+  .s-layout__content {
+    margin-left: 4em;
+    margin-top: 5em;
+    display: flex;
+    flex: 1;
+  }
+  
+  /* Sidebar */
+  .s-sidebar__trigger {
+     width: 4em;
+  }
+  
+  .s-sidebar__nav {
+     width: 4em;
+     left: 0;
+  }
+
+  .s-sidebar__nav ul {
+    top: 100px;
+ }
+  
+  .s-sidebar__nav:hover,
+  .s-sidebar__nav:focus,
+  .s-sidebar__trigger:hover + .s-sidebar__nav,
+  .s-sidebar__trigger:focus + .s-sidebar__nav {
+     width: 15em;
+  }
+}
+
+@media (min-width: 68em) {
+  .s-layout__content {
+     margin-left: 15em;
+     margin-top: 5em;
+     display: flex;
+     flex: 1;
+  }
+  
+  /* Sidebar */
+  .s-sidebar__trigger {
+     display: none
+  }
+  
+  .s-sidebar__nav {
+     width: 15em;
+  }
+  
+  .s-sidebar__nav ul {
+     top: 100px;
+  }
+}
+
+
+/* Content */
+.credit{
+  text-align: center;
+  color: #000;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.credit a{
+  text-decoration: none;
+  color:#000;
+  font-weight: bold;
+}
+
+
+  
+
