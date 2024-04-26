@@ -4,14 +4,14 @@
         <title>Tambah Data Pasien</title>
         <script type="text/javascript" src="assets/chartjs/Chart.js"></script>  
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link rel="stylesheet" href="assets/style/style.css">     
+        <link rel="stylesheet" href="../assets/style/style.css">     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'> 
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>    
     </head>
     <body class="form-container">
-        <a href="index.php" class="button">Kembali</a>
+        <a href="../index.php" class="button">Kembali</a>
         <br>
         <center>
             <h2>Tambah Data Pasien</h2>

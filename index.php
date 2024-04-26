@@ -21,7 +21,7 @@
     <body>
         <!-- Koneksi ke Database -->
         <?php 
-            include 'connection.php'
+            include 'network/connection.php'
         ?>
 
 
@@ -72,7 +72,7 @@
                 <!-- DATA PASIEN -->
                 <div class="content active" id="data_pasien_content">
                     <h1>Data Pasien</h1>
-                    <a href="add_patient.php" class="button">Tambah Pasien</a>
+                    <a href="screen/add_patient.php" class="button">Tambah Pasien</a>
                     <br>
                     <br>
                     <table border="1" class="table-pasien">
@@ -107,8 +107,8 @@
                                     <td><?php echo $d['pekerjaan']?></td>
                                     <td><?php echo $d['alamat']?></td>
                                     <td>
-                                        <a href="edit_patient.php?id=<?php echo $d['id']; ?>" class="button-edit"><i class="fa fa-pen"></i></a>
-                                        <a href="delete_patient.php?id=<?php echo $d['id']?>" class="button-delete"><i class="fa fa-trash"></i></a>
+                                        <a href="screen/edit_patient.php?id=<?php echo $d['id']; ?>" class="button-edit"><i class="fa fa-pen"></i></a>
+                                        <a href="screen/delete_patient.php?id=<?php echo $d['id']?>" class="button-delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -127,13 +127,13 @@
                             $data = mysqli_query($connection, "SELECT * FROM pasien_data");
                             while($d = mysqli_fetch_array($data)){
                                 ?>
-                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <option value="<?php echo $d['nik'] ?>"><?php echo $d['nama_pasien'] ?></option>
                                 <?php
                             }
                             ?>
                         </select>
                     </form>
-                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    <button id="showData" class="button" style="margin-left: 10px;">Lihat</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -153,13 +153,13 @@
                             $data = mysqli_query($connection, "SELECT * FROM pasien_data");
                             while($d = mysqli_fetch_array($data)){
                                 ?>
-                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <option value="<?php echo $d['nik'] ?>"><?php echo $d['nama_pasien'] ?></option>
                                 <?php
                             }
                             ?>
                         </select>
                     </form>
-                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    <button id="showDataOksigen" class="button" style="margin-left: 10px;">Lihat</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -179,13 +179,13 @@
                             $data = mysqli_query($connection, "SELECT * FROM pasien_data");
                             while($d = mysqli_fetch_array($data)){
                                 ?>
-                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <option value="<?php echo $d['nik'] ?>"><?php echo $d['nama_pasien'] ?></option>
                                 <?php
                             }
                             ?>
                         </select>
                     </form>
-                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    <button id="showDataSuhu" class="button" style="margin-left: 10px;">Lihat</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -208,122 +208,150 @@
             const ctx2 = document.getElementById('myChartOksigen');
             const ctx3 = document.getElementById('myChartSuhu');
             
-            // Jantung
-            <?php 
-                $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
-                $row = mysqli_fetch_assoc($time);
-                $total_rows = $row['total'];
+            $(document).ready(function(){
+                $('#nama_pasien').select2();
+                $('#oksigen').select2();
+                $('#suhu').select2();
 
-                $data = mysqli_query($connection, "SELECT sensor1 FROM monitoring_data WHERE nik='123456789'");
-                $sensor1_data = array();
-                while($d = mysqli_fetch_assoc($data)){
-                    $sensor1_data[] = $d['sensor1'];
+                var myChart = null;
+                var myChartOksigen = null;
+                var myChartSuhu
+
+                $('#showData').on('click', function() {
+                    var selectedNik = $('#nama_pasien').val();
+                    $.ajax({
+                        url: 'data/getData.php',
+                        method: 'POST',
+                        data: {nik: selectedNik},
+                        success: function(response) {
+                            var data = JSON.parse(response);
+                            updateChart(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+
+                $('#showDataOksigen').on('click', function() {
+                    var selectedNik = $('#oksigen').val();
+                    $.ajax({
+                        url: 'data/getDataOksigen.php',
+                        method: 'POST',
+                        data: {nik: selectedNik},
+                        success: function(response) {
+                            var data = JSON.parse(response);
+                            updateChartOksigen(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+
+                $('#showDataSuhu').on('click', function() {
+                    var selectedNik = $('#suhu').val();
+                    $.ajax({
+                        url: 'data/getDataSuhu.php',
+                        method: 'POST',
+                        data: {nik: selectedNik},
+                        success: function(response) {
+                            var data = JSON.parse(response);
+                            updateChartSuhu(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+
+
+                function updateChart(data) {
+                    if (myChart) {
+                        myChart.destroy();
+                    }
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'Heart Rate',
+                                data: data.sensorData,
+                                backgroundColor: 'rgba(255, 99, 71, 1)',
+                                borderColor: 'rgba(255, 99, 71, 1)',
+                                borderWidth: 1,
+                                lineTension: 0.5,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
-            ?>
- 
-	        new Chart(ctx, {
-		        type: 'line',
-		        data: {
-			        labels: Array.from(Array(<?php echo $total_rows; ?>).keys()),
-			    datasets: [{
-				    label: 'Hear Rate',
-				    data: <?php echo json_encode($sensor1_data); ?>,
-				backgroundColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderWidth: 1,
-                lineTension: 0.5,
-			        }]
-		        },
-		    options: {
-			    scales: {
-				    y: {
-					    beginAtZero: true
-				    }
-			    }
-		    }
-	    });
 
-                    // Oksigen
-            <?php 
-                $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
-                $row = mysqli_fetch_assoc($time);
-                $total_rows = $row['total'];
-
-                $data = mysqli_query($connection, "SELECT sensor1 FROM monitoring_data WHERE nik='123456789'");
-                $sensor1_data = array();
-                while($d = mysqli_fetch_assoc($data)){
-                    $sensor1_data[] = $d['sensor1'];
+                function updateChartOksigen(data) {
+                    if (myChartOksigen) {
+                        myChartOksigen.destroy();
+                    }
+                    var ctx = document.getElementById('myChartOksigen').getContext('2d');
+                    myChartOksigen = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'Oksigen',
+                                data: data.sensorData,
+                                backgroundColor: 'rgba(255, 99, 71, 1)',
+                                borderColor: 'rgba(255, 99, 71, 1)',
+                                borderWidth: 1,
+                                lineTension: 0.5,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
-            ?>
- 
-	        new Chart(ctx2, {
-		        type: 'line',
-		        data: {
-			        labels: Array.from(Array(<?php echo $total_rows; ?>).keys()),
-			    datasets: [{
-				    label: 'Hear Rate',
-				    data: <?php echo json_encode($sensor1_data); ?>,
-				backgroundColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderWidth: 1,
-                lineTension: 0.5,
-			        }]
-		        },
-		    options: {
-			    scales: {
-				    y: {
-					    beginAtZero: true
-				    }
-			    }
-		    }
-	    });
 
-            // Suhu
-                    <?php 
-                $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
-                $row = mysqli_fetch_assoc($time);
-                $total_rows = $row['total'];
-
-                $data = mysqli_query($connection, "SELECT sensor1 FROM monitoring_data WHERE nik='123456789'");
-                $sensor1_data = array();
-                while($d = mysqli_fetch_assoc($data)){
-                    $sensor1_data[] = $d['sensor1'];
+                function updateChartSuhu(data) {
+                    if (myChartSuhu) {
+                        myChartSuhu.destroy();
+                    }
+                    var ctx = document.getElementById('myChartSuhu').getContext('2d');
+                    myChartSuhu = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'Suhu',
+                                data: data.sensorData,
+                                backgroundColor: 'rgba(255, 99, 71, 1)',
+                                borderColor: 'rgba(255, 99, 71, 1)',
+                                borderWidth: 1,
+                                lineTension: 0.5,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
-            ?>
+            });
  
-	        new Chart(ctx3, {
-		        type: 'line',
-		        data: {
-			        labels: Array.from(Array(<?php echo $total_rows; ?>).keys()),
-			    datasets: [{
-				    label: 'Hear Rate',
-				    data: <?php echo json_encode($sensor1_data); ?>,
-				backgroundColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderColor: [
-					'rgba(255, 99, 71, 1)',
-					],
-				borderWidth: 1,
-                lineTension: 0.5,
-			        }]
-		        },
-		    options: {
-			    scales: {
-				    y: {
-					    beginAtZero: true
-				    }
-			    }
-		    }
-	    });
+    
 
     $('.s-sidebar__nav-link').on('click', function () {
         var linkText = $(this).text().trim();
