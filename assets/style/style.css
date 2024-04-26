@@ -143,6 +143,42 @@ table {
   font-weight: bold;
 }
 
+.card_form {
+  width: calc(100vw - 60px);
+  background: white;
+  margin: 80px auto;
+  padding: 30px 20px;
+  border-radius: 20px;
+}
+
+.input_form {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  font-size: 11pt;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  padding: 20px;
+}
+
+label {
+  font-size: 11pt;
+}
+
+.js-select2 {
+  width: 400px;
+}
+
+.search-content {
+  display: flex;
+  height: 50px;
+  width: 500px;
+  align-items: center;
+}
+
+
 
 /* navbar */
 .navbar {

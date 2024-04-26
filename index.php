@@ -14,6 +14,8 @@
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'> 
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     </head>
 
     <body>
@@ -118,16 +120,81 @@
                 <!-- DENYUT JANTUNG -->
                 <div class="content" id="denyut_jantung_content">
                     <h1>Monitoring Denyut Jantung Pasien</h1>
+                    <div class="search-content">
+                    <form method="POST">
+                        <select class="js-select2" name="nama_pasien" id="nama_pasien">
+                            <?php
+                            $data = mysqli_query($connection, "SELECT * FROM pasien_data");
+                            while($d = mysqli_fetch_array($data)){
+                                ?>
+                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </form>
+                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    </div>
+                    <br>
                     <div class="chartCard">
                         <div class="chartBox">
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
+                    <br>
                 </div>
                 <!-- SATURASI OKSIGEN -->
-                <div class="content" id="saturasi_oksigen_content">Konten Saturasi Oksigen</div>
+                <div class="content" id="saturasi_oksigen_content">
+                <h1>Monitoring Saturasi Oksigen</h1>
+                    <div class="search-content">
+                    <form method="POST">
+                        <select class="js-select2" name="nama_pasien" id="oksigen">
+                            <?php
+                            $data = mysqli_query($connection, "SELECT * FROM pasien_data");
+                            while($d = mysqli_fetch_array($data)){
+                                ?>
+                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </form>
+                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    </div>
+                    <br>
+                    <div class="chartCard">
+                        <div class="chartBox">
+                            <canvas id="myChartOksigen"></canvas>
+                        </div>
+                    </div>
+                    <br>
+                </div>
                 <!-- SUHU -->
-                <div class="content" id="suhu_content">Konten Suhu</div>
+                <div class="content" id="suhu_content">
+                <h1>Monitoring Suhu</h1>
+                    <div class="search-content">
+                    <form method="POST">
+                        <select class="js-select2" name="nama_pasien" id="suhu">
+                            <?php
+                            $data = mysqli_query($connection, "SELECT * FROM pasien_data");
+                            while($d = mysqli_fetch_array($data)){
+                                ?>
+                                <option value="<?php echo $d['id'] ?>"><?php echo $d['nama_pasien'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </form>
+                    <a href="#" class="button" style="margin-left: 10px;">Cari</a>
+                    </div>
+                    <br>
+                    <div class="chartCard">
+                        <div class="chartBox">
+                            <canvas id="myChartSuhu"></canvas>
+                        </div>
+                    </div>
+                    <br>
+                </div>
             </main>
         </div>
         </div>
@@ -138,7 +205,10 @@
     </body>
         <script>
 	        const ctx = document.getElementById('myChart');
-
+            const ctx2 = document.getElementById('myChartOksigen');
+            const ctx3 = document.getElementById('myChartSuhu');
+            
+            // Jantung
             <?php 
                 $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
                 $row = mysqli_fetch_assoc($time);
@@ -166,21 +236,109 @@
 					],
 				borderWidth: 1,
                 lineTension: 0.5,
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	});
+			        }]
+		        },
+		    options: {
+			    scales: {
+				    y: {
+					    beginAtZero: true
+				    }
+			    }
+		    }
+	    });
+
+                    // Oksigen
+            <?php 
+                $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
+                $row = mysqli_fetch_assoc($time);
+                $total_rows = $row['total'];
+
+                $data = mysqli_query($connection, "SELECT sensor1 FROM monitoring_data WHERE nik='123456789'");
+                $sensor1_data = array();
+                while($d = mysqli_fetch_assoc($data)){
+                    $sensor1_data[] = $d['sensor1'];
+                }
+            ?>
+ 
+	        new Chart(ctx2, {
+		        type: 'line',
+		        data: {
+			        labels: Array.from(Array(<?php echo $total_rows; ?>).keys()),
+			    datasets: [{
+				    label: 'Hear Rate',
+				    data: <?php echo json_encode($sensor1_data); ?>,
+				backgroundColor: [
+					'rgba(255, 99, 71, 1)',
+					],
+				borderColor: [
+					'rgba(255, 99, 71, 1)',
+					],
+				borderWidth: 1,
+                lineTension: 0.5,
+			        }]
+		        },
+		    options: {
+			    scales: {
+				    y: {
+					    beginAtZero: true
+				    }
+			    }
+		    }
+	    });
+
+            // Suhu
+                    <?php 
+                $time = mysqli_query($connection, "SELECT COUNT(*) AS total FROM monitoring_data");
+                $row = mysqli_fetch_assoc($time);
+                $total_rows = $row['total'];
+
+                $data = mysqli_query($connection, "SELECT sensor1 FROM monitoring_data WHERE nik='123456789'");
+                $sensor1_data = array();
+                while($d = mysqli_fetch_assoc($data)){
+                    $sensor1_data[] = $d['sensor1'];
+                }
+            ?>
+ 
+	        new Chart(ctx3, {
+		        type: 'line',
+		        data: {
+			        labels: Array.from(Array(<?php echo $total_rows; ?>).keys()),
+			    datasets: [{
+				    label: 'Hear Rate',
+				    data: <?php echo json_encode($sensor1_data); ?>,
+				backgroundColor: [
+					'rgba(255, 99, 71, 1)',
+					],
+				borderColor: [
+					'rgba(255, 99, 71, 1)',
+					],
+				borderWidth: 1,
+                lineTension: 0.5,
+			        }]
+		        },
+		    options: {
+			    scales: {
+				    y: {
+					    beginAtZero: true
+				    }
+			    }
+		    }
+	    });
 
     $('.s-sidebar__nav-link').on('click', function () {
         var linkText = $(this).text().trim();
         $('.content').removeClass('active');
         $('#' + linkText.toLowerCase().replace(/ /g, '_') + '_content').addClass('active');
+    });
+
+    $(document).ready(function() {
+        $('#nama_pasien').select2();
+    });
+    $(document).ready(function() {
+        $('#oksigen').select2();
+    });
+    $(document).ready(function() {
+        $('#suhu').select2();
     });
     </script>
 </html>
