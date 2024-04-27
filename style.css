@@ -62,6 +62,19 @@ table {
   border-radius: 8px;
 }
 
+.button-stop {
+  background-color:red; 
+  border: none;
+  color: white;
+  padding: 8px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+
 .button-edit {
   border: none;
   color: var(--grey-color);
@@ -505,7 +518,7 @@ form .button input:hover{
 .wrapper form .signup-link a{
   /* color: #16a085; */
   text-decoration: none;
-}
+}s
 form .signup-link a:hover{
   text-decoration: underline;
 }

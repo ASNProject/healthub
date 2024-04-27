@@ -132,7 +132,8 @@
                             ?>
                         </select>
                     </form>
-                    <button id="showData" class="button" style="margin-left: 10px;">Lihat</button>
+                    <button id="showData" class="button" style="margin-left: 10px;">Mulai</button>
+                    <button class="button-stop" style="margin-left: 10px;">Stop</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -158,7 +159,8 @@
                             ?>
                         </select>
                     </form>
-                    <button id="showDataOksigen" class="button" style="margin-left: 10px;">Lihat</button>
+                    <button id="showDataOksigen" class="button" style="margin-left: 10px;">Mulai</button>
+                    <button class="button-stop" style="margin-left: 10px;">Stop</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -184,7 +186,8 @@
                             ?>
                         </select>
                     </form>
-                    <button id="showDataSuhu" class="button" style="margin-left: 10px;">Lihat</button>
+                    <button id="showDataSuhu" class="button" style="margin-left: 10px;">Mulai</button>
+                    <button class="button-stop" style="margin-left: 10px;">Stop</button>
                     </div>
                     <br>
                     <div class="chartCard">
@@ -367,5 +370,6 @@
     $(document).ready(function() {
         $('#suhu').select2();
     });
+
     </script>
 </html>
