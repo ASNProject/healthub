@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>    
     </head>
     <body class="form-container">
-        <a href="../index.php" class="button">Kembali</a>
+        <a href="../dashboard.php" class="button">Kembali</a>
         <br>
         <center>
             <h2>Edit Data Pasien</h2>
@@ -23,7 +23,7 @@
         $data = mysqli_query($connection, "select * from pasien_data where id='$id'");
         while($d = mysqli_fetch_array($data)){
             ?>
-            <form action="edit_action.php" method="POST">
+            <form action="../network/edit_action.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $d['id']; ?>" class="input_form">
                 <label>Nama Pasien</label>
                 <input type="text" name="nama_pasien" value="<?php echo $d['nama_pasien']?>" class="input_form">

@@ -107,7 +107,7 @@
                                     <td><?php echo $d['alamat']?></td>
                                     <td>
                                         <a href="screen/edit_patient.php?id=<?php echo $d['id']; ?>" class="button-edit"><i class="fa fa-pen"></i></a>
-                                        <a href="screen/delete_patient.php?id=<?php echo $d['id']?>" class="button-delete"><i class="fa fa-trash"></i></a>
+                                        <a href="network/delete_patient.php?id=<?php echo $d['id']?>" class="button-delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>

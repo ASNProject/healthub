@@ -14,7 +14,7 @@ $alamat = $_POST['alamat'];
 $query = "UPDATE pasien_data SET nama_pasien = '$nama_pasien', jenis_kelamin = '$jenis_kelamin', tanggal_lahir = '$tanggal_lahir', nik = '$nik', berat_badan = '$berat_badan', tinggi_badan = '$tinggi_badan', pekerjaan = '$pekerjaan', alamat = '$alamat' WHERE id = '$id'";
 
 if($connection->query($query)){
-    header("location: ../index.php");
+    header("location: ../dashboard.php");
 } else {
     echo "Data gagal disimpan";
 }
