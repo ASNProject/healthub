@@ -108,7 +108,7 @@
                             </select>
                         </form>
                         <button id="showData" class="button" style="margin-left: 10px;">Mulai</button>
-                        <button class="button-stop" style="margin-left: 10px;">Stop</button>
+                        <button id="stopData" class="button-stop" style="margin-left: 10px;">Stop</button>
                     </div>
                     <br>
                     <h3>HeartRate</h3>
@@ -291,6 +291,54 @@
                     }
                 });
             }
+        });
+    });
+    $(document).ready(function() {
+        $('#showData').on('click', function() {
+            var selectedNama = $('#nama_pasien option:selected').text(); 
+            var selectedNik = $('#nama_pasien').val(); 
+            var updateId = 1; 
+            var data = {
+                nama: selectedNama,
+                nik: selectedNik
+            };
+            fetch('http://localhost/healthub/rest_api/api.php/update/' + updateId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result); 
+            })
+            .catch(error => {
+                console.error('Error:', error); 
+            });
+        });
+    });
+    $(document).ready(function() {
+        $('#stopData').on('click', function() {
+            var updateId = 1; 
+            var data = {
+                nama: '',
+                nik: ''
+            };
+            fetch('http://localhost/healthub/rest_api/api.php/update/' + updateId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result); 
+            })
+            .catch(error => {
+                console.error('Error:', error); 
+            });
         });
     });
     </script>
