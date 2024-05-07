@@ -5,11 +5,13 @@
     require_once 'admin.php';
     require_once 'saturation_data.php';
     require_once 'suhu_data.php';
+    require_once 'update_data.php';
     $heartrateObj = new HeartRate($conn);
     $pasienObj = new PasienData($conn);
     $adminObj = new Admin($conn);
     $saturationObj = new Saturation($conn);
     $suhuObj = new Suhu($conn);
+    $updateObj = new UpdateData($conn);
     $method = $_SERVER['REQUEST_METHOD'];
     $endpoint = $_SERVER['PATH_INFO'];
     header('Content-Type: application/json');
@@ -51,6 +53,13 @@
                 $suhuId = $matches[1];
                 $suhus = $suhuObj->getSuhuDataById($suhuId);
                 echo json_encode($suhus);
+            } elseif ($endpoint == '/update'){
+                $updates = $updateObj->getAllUpdateData();
+                echo json_encode($updates);
+            } elseif (preg_match('/^\/update\/(\d+)$/', $endpoint, $matches)) {
+                $updateId = $matches[1];
+                $updates = $suhuObj->getSuhuDataById($updateId);
+                echo json_encode($updates);
             }
             break;
         case 'POST':
@@ -73,6 +82,10 @@
             } elseif ($endpoint === '/suhu'){
                 $data = json_decode(file_get_contents('php://input'), true);
                 $result = $suhuObj->addSuhuData($data);
+                echo json_encode(['success' => $result]);
+            } elseif ($endpoint === '/update'){
+                $data = json_decode(file_get_contents('php://input'), true);
+                $result = $updateObj->addUpdateData($data);
                 echo json_encode(['success' => $result]);
             }
             break;
@@ -102,6 +115,11 @@
                 $data = json_decode(file_get_contents('php://input'), true);
                 $result = $suhuObj->updateSuhuData($suhuId, $data);
                 echo json_encode(['success' => $result]);
+            } elseif (preg_match('/^\/update\/(\d+)$/', $endpoint, $matches)){
+                $updateId = $matches[1];
+                $data = json_decode(file_get_contents('php://input'), true);
+                $result = $updateObj->updateUpdateData($updateId, $data);
+                echo json_encode(['success' => $result]);
             }
             break;
         case 'DELETE':
@@ -124,6 +142,10 @@
             } elseif (preg_match('/^\/suhu\/(\d+)$/', $endpoint, $matches)){
                 $suhuId = $matches[1];
                 $result = $suhuObj->deleteSuhuData($suhuId);
+                echo json_encode(['success' => $result]);
+            } elseif (preg_match('/^\/update\/(\d+)$/', $endpoint, $matches)){
+                $updateId = $matches[1];
+                $result = $updateObj->deleteUpdateData($updateId);
                 echo json_encode(['success' => $result]);
             }
             break;
