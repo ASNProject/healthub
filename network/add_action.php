@@ -13,7 +13,7 @@ $alamat = $_POST['alamat'];
 $query = "INSERT INTO pasien_data (nama_pasien, jenis_kelamin, tanggal_lahir, nik, berat_badan, tinggi_badan, pekerjaan, alamat) VALUES ('$nama_pasien', '$jenis_kelamin', '$tanggal_lahir', '$nik', '$berat_badan', '$tinggi_badan', '$pekerjaan', '$alamat')";
 
 if($connection->query($query)){
-    header("location: ../dashboard.php");
+    header("location: ../dashboard2.php");
 } else {
     echo "Data gagal disimpan";
 }

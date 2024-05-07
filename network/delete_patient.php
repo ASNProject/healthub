@@ -8,7 +8,7 @@ $id = $_GET['id'];
 $query = "DELETE FROM pasien_data WHERE id = '$id'";
 
 if($connection->query($query)) {
-    header("location: ../dashboard.php");
+    header("location: ../dashboard2.php");
 } else {
     echo "DATA GAGAL DIHAPUS!";
 }

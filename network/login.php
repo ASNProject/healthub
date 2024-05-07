@@ -8,7 +8,7 @@
     $cek = mysqli_num_rows($data);
     
     if($cek >= 0){
-        header("location: ../dashboard.php");
+        header("location: ../dashboard2.php");
     } else {
         echo "Data gagal disimpan";
     }
