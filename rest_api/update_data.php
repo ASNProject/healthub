@@ -10,10 +10,7 @@
         {
             $query = "SELECT * FROM update_data";
             $result = mysqli_query($this->conn, $query);
-            $updates = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $updates[] = $row;
-            }
+            $updates = mysqli_fetch_assoc($result);
             return $updates;
         }
         public function getUpdateDataById($id)

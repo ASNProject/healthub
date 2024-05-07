@@ -63,7 +63,7 @@
             }
             break;
         case 'POST':
-            if ($endpoint === '/hearrates') {
+            if ($endpoint === '/heartrates') {
                 $data = json_decode(file_get_contents('php://input'), true);
                 $result = $heartrateObj->addHearrateData($data);
                 echo json_encode(['success' => $result]);
@@ -90,7 +90,7 @@
             }
             break;
         case 'PUT':
-            if (preg_match('/^\/hearrates\/(\d+)$/', $endpoint, $matches)){
+            if (preg_match('/^\/heartrates\/(\d+)$/', $endpoint, $matches)){
                 $heartrateId = $matches[1];
                 $data = json_decode(file_get_contents('php://input'), true);
                 $result = $heartrateObj->updateHearrateData($heartrateId, $data);
@@ -123,7 +123,7 @@
             }
             break;
         case 'DELETE':
-            if (preg_match('/^\/hearrates\/(\d+)$/', $endpoint, $matches)){
+            if (preg_match('/^\/heartrates\/(\d+)$/', $endpoint, $matches)){
                 $heartrateId = $matches[1];
                 $result = $heartrateObj->deleteHearrateData($heartrateId);
                 echo json_encode(['success' => $result]);
