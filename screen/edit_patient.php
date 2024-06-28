@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>    
     </head>
     <body class="form-container">
-        <a href="../dashboard2.php" class="button">Kembali</a>
+        <a href="data_pasien_screen.php" class="button">Kembali</a>
         <br>
         <center>
             <h2>Edit Data Pasien</h2>

@@ -1,0 +1,140 @@
+/**
+ * Copyright 2024 ariefsetyonugroho
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+body {
+    font-family: "Inter";
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+}
+
+footer {
+    background: #f8f9fa;
+    padding: 20px 0;
+}
+
+/* Navbar */
+.navbar {
+    margin-top: 20px;
+}
+.logo_item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 22px;
+    font-weight: 500;
+}
+  
+#health {
+    color: black;
+    font-size: 36px;
+}
+  
+#hub {
+    color: #00a1fb;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Chart */
+#responsecontainer {
+    margin-top: 20px;
+}
+
+#responsecontainer1 {
+    margin-top: 20px;
+}
+
+#responsecontainer2 {
+    margin-top: 20px;
+}
+
+.emptystate .text-empty {
+    text-align: center;
+}
+
+.emptystate .empty-image {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+footer {
+    background-color: #33383c;
+    padding: 50px 0px;
+    margin-top: 50px;
+    bottom: 0;
+    width: 100%;
+}
+
+footer ul li{
+    padding: 5px 0px;
+}
+
+.address span , .contact span , .social span {
+    color: #fff;
+    font-weight: 800;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    display: block;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 3px; 
+}
+
+.address li p, .contact li a, .social li a{
+    color: #fff;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.social li{
+    float: left;
+}
+
+.address, .contact, .social {
+    list-style: none;
+}
+
+.fa{
+    color: #9c9c9c;
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* Button */
+#stopButton {
+    background-color: red;
+    color: white;
+}
+
+/* Table */
