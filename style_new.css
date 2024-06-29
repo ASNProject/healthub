@@ -33,6 +33,106 @@ html, body {
     flex: 1;
 }
 
+/* Dashboard */
+.content-area {
+    /* background-color: green; */
+    width: 100%;
+    height: 90vh;
+}
+
+.content-footer {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.content-feature {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.content-box-icon {
+    height: 50px;
+    width: 50px;
+    border: 2px solid #00A1FB;
+    border-width: 2px;
+    border-radius: 10px;
+    text-align: center;
+    /* margin: 20px; */
+}
+
+.content-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.content-button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.content-button .fa {
+    margin-left: 10px;
+    color: white;
+}
+
+.content-image {
+    height: 80vh;
+}
+
+.content-box {
+    /* position: absolute; */
+    padding: 10px;
+    width: 50%;
+    background-color: #D4EFFE;
+    text-align: center;
+    left: 0;
+    color: #00A1FB;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.content-box-title {
+    font-weight: bold;
+}
+.content-box-subtitle {
+    font-size: 10px;
+    margin-top: -10px;
+}
+
+.image-background {
+    position: absolute;
+    bottom: 0;
+}
+
+.content-description {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 100;
+    font-style: italic;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+.content-text1 {
+    width: 80%;
+    font-size: 24px;
+    font-weight: 900;
+    /* font-style: italic; */
+    margin-top: 40px;
+}
+
 footer {
     background: #f8f9fa;
     padding: 20px 0;
@@ -89,10 +189,10 @@ footer {
 /* Footer */
 footer {
     background-color: #33383c;
-    padding: 50px 0px;
+    /* padding: 50px 0px;
     margin-top: 50px;
-    bottom: 0;
-    width: 100%;
+    bottom: 0; */
+    /* width: 100%; */
 }
 
 footer ul li{
@@ -137,4 +237,4 @@ footer ul li{
     color: white;
 }
 
-/* Table */
+

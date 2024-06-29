@@ -36,8 +36,62 @@
         </div>
 
         <!-- Content -->
-        <div class="main-content">
-            <h1 class="container">Beranda</h1>
+        <div class="container">
+            <div class=" content-area">
+                <div class="row">
+                    <div class="col-lg-6 col-xs-12 content-image">
+                        <div class="content-box">Health Monitoring System</div>
+                        <div class="content-text1">"Empower Your Health Journey with HealthHub: Where IoT Meets Wellness!"</div>
+                        <p class="content-description">HealtHub adalah sistem inovatif yang mengintegrasikan teknologi Internet of Things (IoT) untuk mengoptimalkan pengalaman kesehatan Anda. Dengan pendekatan yang holistik, HealthHub menyediakan monitoring kesehatan yang canggih dan terintegrasi, memungkinkan Anda untuk secara aktif mengelola kondisi kesehatan Anda dengan lebih efektif. Sistem ini tidak hanya mengumpulkan data vital seperti suhu tubuh dan tingkat oksigen, tetapi juga memberikan analisis mendalam yang membantu dalam memantau dan meningkatkan kualitas hidup Anda secara keseluruhan. Dengan HealthHub, Anda dapat meraih kesejahteraan optimal dengan pemahaman yang lebih baik tentang kondisi kesehatan Anda, menghadirkan masa depan yang lebih sehat dan lebih baik.</p>
+                        <div class=" container content-feature">
+                            <h3 style="font-weight:bold;">Fitur HealtHub</h3>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5" style="margin: 10px">
+                                    <div class="row">
+                                        <div class="col-lg-4 content-box-icon">
+                                            <img src="../assets/img/temperature.png" alt="" style="position: absolute; left: -6px; bottom: -6px;">
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="content-box-title">Detak Jantung</p>
+                                            <p class="content-box-subtitle">Menghitung detak jantung secara realtime</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5" style="margin: 10px">
+                                    <div class="row">
+                                        <div class="col-lg-4 content-box-icon">
+                                            <img src="../assets/img/oxygen.png" alt="" style="position: absolute; left: -2px; bottom: -4px;">
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="content-box-title">Saturation</p>
+                                            <p class="content-box-subtitle">Menghitung saturasi oksigen dalam tubuh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5" style="margin: 10px">
+                                    <div class="row">
+                                        <div class="col-lg-4 content-box-icon">
+                                            <img src="../assets/img/thermometer.png" alt="" style="position: absolute; left: 12px; bottom: 12px;">
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="content-box-title">Suhu Tubuh</p>
+                                            <p class="content-box-subtitle">Menghitung suhu tubuh secara berkala</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; text-align: center;">
+                            <a href="chart_screen.php" class="content-button">
+                                Mulai Sekarang <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-12 content-image">
+                        <img src="../assets/img/background-removebg-preview.png" alt="" class="image-background">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->

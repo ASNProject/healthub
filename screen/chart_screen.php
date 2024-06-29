@@ -18,7 +18,10 @@
             function getData() {
                 var nama = encodeURIComponent($('#nama').val());
                 if (nama === '') {
-                    $('#empty-data').html('<div class="emptystate"><img class="empty-image" src="../assets/img/empty_data.jpg" alt=""><div class="text-empty">Silahkan masukkan nama pasien terlebih dahulu!</div></div>')
+                    $('#empty-data').html('<div class="emptystate"><img class="empty-image" src="../assets/img/empty_data.jpg" alt=""><div class="text-empty">Silahkan masukkan nama pasien terlebih dahulu! </br> Pastikan juga nama pasien sudah ada dalam daftar pasien</div></div>')
+                    $('#responsecontainer').html('');
+                    $('#responsecontainer1').html('');
+                    $('#responsecontainer2').html('');
                 } else {
                     $('#empty-data').html('');
                     $.ajax({
